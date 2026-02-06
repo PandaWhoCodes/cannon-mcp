@@ -15,11 +15,11 @@ export default function TagsPage() {
       <div className="flex flex-wrap gap-2">
         {tags.data?.map(tag => (
           <Link
-            key={tag.tag_name}
-            to={`/tags/${encodeURIComponent(tag.tag_name)}`}
+            key={tag.name}
+            to={`/tags/${encodeURIComponent(tag.name)}`}
             className="inline-flex items-center gap-1 px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm hover:bg-blue-50 hover:border-blue-300"
           >
-            <span className="text-gray-700">{tag.tag_name}</span>
+            <span className="text-gray-700">{tag.name}</span>
             <span className="text-xs text-gray-400">{tag.thread_count}</span>
           </Link>
         ))}

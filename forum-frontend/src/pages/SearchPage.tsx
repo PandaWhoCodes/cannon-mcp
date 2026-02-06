@@ -39,10 +39,10 @@ export default function SearchPage() {
 
       {results.data && (
         <div className="bg-white rounded-lg border border-gray-200 divide-y divide-gray-100">
-          {results.data.length === 0 ? (
+          {results.data.results.length === 0 ? (
             <p className="p-4 text-sm text-gray-500">No results found</p>
           ) : (
-            results.data.map((result, i) => (
+            results.data.results.map((result, i) => (
               <Link
                 key={`${result.id}-${i}`}
                 to={result.thread_id ? `/threads/${result.thread_id}` : `/threads/${result.id}`}

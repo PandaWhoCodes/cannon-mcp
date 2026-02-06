@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import type { Thread } from '../api/types'
+import type { ThreadSummary } from '../api/types'
 import TagBadge from './TagBadge'
 import { timeAgo } from '../utils'
 
-export default function ThreadRow({ thread }: { thread: Thread }) {
+export default function ThreadRow({ thread }: { thread: ThreadSummary }) {
   return (
     <div className="flex items-start gap-3 p-3 bg-white border-b border-gray-100 hover:bg-gray-50">
       <div className="flex flex-col items-center min-w-[3rem] text-center">

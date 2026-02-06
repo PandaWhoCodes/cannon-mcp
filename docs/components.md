@@ -70,7 +70,7 @@ Prev/Next navigation for paginated lists. Receives `page`, `totalPages`, and `on
 ### NewThreadPage (`src/pages/NewThreadPage.tsx`)
 
 - Form: title, author name, content, tags (comma-separated)
-- Posts to `/api/threads` with category_id from query param
+- Posts to `/api/threads` with category_id from route param (`/categories/:id/new`)
 - Redirects to new thread page on success
 
 ### SearchPage (`src/pages/SearchPage.tsx`)

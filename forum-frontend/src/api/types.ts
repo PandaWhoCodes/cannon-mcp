@@ -6,17 +6,21 @@ export interface Category {
   thread_count: number
 }
 
-export interface Thread {
+export interface ThreadSummary {
   id: number
   category_id: number
   title: string
   author_name: string
-  is_pinned: number
-  is_locked: number
+  is_pinned: boolean
+  is_locked: boolean
   created_at: string
   updated_at: string
-  post_count?: number
-  tags?: string[]
+  post_count: number
+  tags: string[]
+}
+
+export interface ThreadDetail extends ThreadSummary {
+  category_name: string
 }
 
 export interface Post {
@@ -39,7 +43,7 @@ export interface Reaction {
 }
 
 export interface Tag {
-  tag_name: string
+  name: string
   thread_count: number
 }
 
@@ -72,11 +76,18 @@ export interface TrendingThread {
 }
 
 export interface SearchResult {
+  type: 'thread' | 'post'
   id: number
-  title?: string
+  title: string | null
   content: string
   author_name: string
-  created_at: string
-  thread_id?: number
-  rank: number
+  thread_id: number | null
+  relevance_score: number
+}
+
+export interface SearchResponse {
+  query: string
+  type: string
+  total: number
+  results: SearchResult[]
 }

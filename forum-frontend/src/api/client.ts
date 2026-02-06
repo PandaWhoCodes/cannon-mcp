@@ -1,13 +1,14 @@
 import type {
   Category,
-  Thread,
+  ThreadSummary,
+  ThreadDetail,
   Post,
   Reaction,
   Tag,
   PaginatedResponse,
   ForumStats,
   TrendingThread,
-  SearchResult,
+  SearchResponse,
 } from './types'
 
 const BASE = '/api'
@@ -44,10 +45,10 @@ export const getThreads = (
   if (params?.sort) sp.set('sort', params.sort)
   if (params?.order) sp.set('order', params.order)
   const qs = sp.toString()
-  return request<PaginatedResponse<Thread>>(`/categories/${categoryId}/threads${qs ? `?${qs}` : ''}`)
+  return request<PaginatedResponse<ThreadSummary>>(`/categories/${categoryId}/threads${qs ? `?${qs}` : ''}`)
 }
 
-export const getThread = (id: number) => request<Thread>(`/threads/${id}`)
+export const getThread = (id: number) => request<ThreadDetail>(`/threads/${id}`)
 
 export const createThread = (data: {
   category_id: number
@@ -55,10 +56,10 @@ export const createThread = (data: {
   author_name: string
   content: string
   tags?: string[]
-}) => request<Thread>('/threads', { method: 'POST', body: JSON.stringify(data) })
+}) => request<ThreadDetail>('/threads', { method: 'POST', body: JSON.stringify(data) })
 
-export const updateThread = (id: number, data: { title?: string; is_pinned?: number; is_locked?: number }) =>
-  request<Thread>(`/threads/${id}`, { method: 'PUT', body: JSON.stringify(data) })
+export const updateThread = (id: number, data: { title?: string; is_pinned?: boolean; is_locked?: boolean }) =>
+  request<ThreadDetail>(`/threads/${id}`, { method: 'PUT', body: JSON.stringify(data) })
 
 export const deleteThread = (id: number) =>
   request<void>(`/threads/${id}`, { method: 'DELETE' })
@@ -94,13 +95,13 @@ export const getThreadsByTag = (tagName: string, params?: { page?: number }) => 
   const sp = new URLSearchParams()
   if (params?.page) sp.set('page', String(params.page))
   const qs = sp.toString()
-  return request<PaginatedResponse<Thread>>(`/tags/${encodeURIComponent(tagName)}/threads${qs ? `?${qs}` : ''}`)
+  return request<PaginatedResponse<ThreadSummary>>(`/tags/${encodeURIComponent(tagName)}/threads${qs ? `?${qs}` : ''}`)
 }
 
 // Search
 export const search = (q: string, type: 'threads' | 'posts' | 'all' = 'threads') => {
   const sp = new URLSearchParams({ q, type })
-  return request<SearchResult[]>(`/search?${sp}`)
+  return request<SearchResponse>(`/search?${sp}`)
 }
 
 // Stats

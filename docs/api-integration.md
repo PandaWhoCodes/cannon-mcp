@@ -19,42 +19,43 @@ All API response shapes are defined in `src/api/types.ts`:
 - `Post` — id, thread_id, author_name, content, upvotes, downvotes
 - `Reaction` — id, post_id, reaction_type, reactor_name
 - `Tag` — name, thread_count
-- `SearchResult` — type, id, title, content, author_name, relevance_score
+- `SearchResult` — type, id, title, content, author_name, thread_id, relevance_score
+- `SearchResponse` — query, type, total, results (wraps SearchResult[])
 - `ForumStats` — total counts for categories, threads, posts, reactions, tags
-- `TrendingThread` — id, title, author_name, category_name, score
+- `TrendingThread` — id, title, author_name, category_name, post_count, reaction_count, score
 - `PaginatedResponse<T>` — items, total, page, page_size, total_pages
 
 ## API Functions
 
 ### Categories
-- `fetchCategories()` → `Category[]`
-- `fetchCategory(id)` → `Category`
+- `getCategories()` → `Category[]`
+- `getCategory(id)` → `Category`
 - `createCategory(data)` → `Category`
 
 ### Threads
-- `fetchCategoryThreads(categoryId, page, sort, order)` → `PaginatedResponse<ThreadSummary>`
-- `fetchThread(id)` → `ThreadDetail`
+- `getThreads(categoryId, params?)` → `PaginatedResponse<ThreadSummary>`
+- `getThread(id)` → `ThreadDetail`
 - `createThread(data)` → `ThreadDetail`
 - `updateThread(id, data)` → `ThreadDetail`
 - `deleteThread(id)` → `void`
 
 ### Posts
-- `fetchThreadPosts(threadId, page)` → `PaginatedResponse<Post>`
+- `getPosts(threadId, params?)` → `PaginatedResponse<Post>`
 - `createPost(data)` → `Post`
 - `deletePost(id)` → `void`
 
 ### Reactions
-- `addReaction(postId, type, reactorName)` → `Reaction`
+- `addReaction(postId, data)` → `Reaction`
 - `removeReaction(postId, type, reactorName)` → `void`
 
 ### Tags & Search
-- `fetchTags()` → `Tag[]`
-- `fetchTagThreads(tagName, page)` → `PaginatedResponse<ThreadSummary>`
+- `getTags()` → `Tag[]`
+- `getThreadsByTag(tagName, params?)` → `PaginatedResponse<ThreadSummary>`
 - `search(query, type)` → `SearchResponse`
 
 ### Stats
-- `fetchStats()` → `ForumStats`
-- `fetchTrending()` → `TrendingThread[]`
+- `getStats()` → `ForumStats`
+- `getTrending()` → `TrendingThread[]`
 
 ## React Query Usage
 
@@ -64,7 +65,7 @@ Every page uses React Query hooks:
 // Fetching
 const { data, isLoading } = useQuery({
   queryKey: ["categories"],
-  queryFn: fetchCategories,
+  queryFn: getCategories,
 });
 
 // Mutating

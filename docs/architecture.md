@@ -29,9 +29,9 @@ Backend FastAPI Server
 
 ```
 /                          → HomePage (stats, categories, trending)
-/category/:id              → CategoryPage (threads list, sortable)
-/thread/:id                → ThreadPage (posts, reply form)
-/new-thread?category=:id   → NewThreadPage (create form)
+/categories/:id            → CategoryPage (threads list, sortable)
+/categories/:id/new        → NewThreadPage (create form)
+/threads/:id               → ThreadPage (posts, reply form)
 /search?q=...&type=...     → SearchPage (full-text search)
 /tags                      → TagsPage (all tags)
 /tags/:name                → TagThreadsPage (threads by tag)
