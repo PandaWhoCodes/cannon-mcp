@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-02-06T00:00:00Z",
+  "services": {
+    "backend": {
+      "repo": "PandaWhoCodes/cannon-mcp",
+      "branch": "backend",
+      "last_synced": "2026-02-06T00:00:00Z",
+      "commit_sha": "",
+      "docs": [
+        { "path": "backend/CLAUDE.md", "description": "Backend Claude Code context" },
+        { "path": "backend/service-overview.md", "description": "Backend service overview" }
+      ]
+    },
+    "frontend": {
+      "repo": "PandaWhoCodes/cannon-mcp",
+      "branch": "frontend",
+      "last_synced": "2026-02-06T00:00:00Z",
+      "commit_sha": "",
+      "docs": [
+        { "path": "frontend/CLAUDE.md", "description": "Frontend Claude Code context" },
+        { "path": "frontend/service-overview.md", "description": "Frontend service overview" }
+      ]
+    }
+  },
+  "shared": {
+    "last_updated": "2026-02-06T00:00:00Z",
+    "docs": [
+      { "path": "shared/architecture.md", "description": "System architecture" },
+      { "path": "shared/conventions.md", "description": "Coding conventions" },
+      { "path": "shared/api-contracts.md", "description": "Inter-service API contracts" }
+    ]
+  }
+}
